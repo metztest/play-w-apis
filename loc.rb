@@ -1,7 +1,13 @@
 require 'faraday'
 
-url = 'https://www.loc.gov/collections'
-response = Faraday.get url 
+
+conn = Faraday.new(
+  url: 'https://www.loc.gov/collections',
+  params: {fo:'json', at:'results'},
+  headers: {'Content-Type' => 'application/json'}
+)
+
+response = conn.get
 
 puts response.status
 
